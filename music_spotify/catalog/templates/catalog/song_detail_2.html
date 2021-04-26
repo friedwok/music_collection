@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+	<h1>Title: {{ song.title }}</h1>
+
+	<p><strong>Author:</strong> <a href="">{{ song.get_authors }}</a></p>
+	<p><strong>Album:</strong> {{ song.album }}</p>
+	<p><strong>Genre:</strong> {{ song.genre }}</p>
+
+	<div style="margin-left:20px;margin-top:20px">
+		<h4>Lyrics:</h4>
+
+		<hr>
+		<p>[Intro]​<br>
+		(2, 3, 4)<br>
+		<br>
+		[Chorus]<br>
+		Ahh! Ahh!<br>
+		We come from the land of the ice and snow<br>
+		From the midnight sun where the hot springs flow<br>
+		<br>
+		[Verse 1]<br>
+		The hammer of the gods<br>
+		Will drive our ships to new lands<br>
+		To fight the horde, sing and cry<br>
+		Valhalla, I am coming<br>
+		<br>
+		[Refrain]<br>
+		On we sweep with threshing oar<br>
+		Our only goal will be the western shore</p>
+	</div>
+{% endblock %}

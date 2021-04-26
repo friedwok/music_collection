@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+	<h1>Album: {{ album.name }}</h1>
+	<div style="margin-left:20px;margin-top:20px">
+		<h4>Rel: {{ album.released }}</h4>
+		<hr>
+		{% for song in album.get_songs_from_album %}
+			<p><strong>{{ song.pk }}. <a href="{% url 'song-page' song.pk %}"> {{ song.title }}</a></strong></p>
+		{% endfor %}
+	</div>
+
+{% endblock %}

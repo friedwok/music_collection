@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Home Music Collection</h1>
+
+	<p>We present you our <em>Home Music Collection</em>, 
+	which is compiled by the best experts in music industry.</p>
+
+<h2>Dynamic content</h2>
+
+	<p>Our collection includes the following</p>
+	<ul>
+		<li><strong>Authors:</strong> {{ num_authors }}</li>
+		<li><strong>Songs:</strong> {{ num_songs }}</li>
+		<li><strong>Album:</strong> {{ num_albums }}</li>
+	</ul>
+
+	<p>Page visited: {{ num_visits }}{% if num_visits == 1 %} time {% else %} times{% endif %}.</p>
+
+{% endblock %}

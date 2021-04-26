@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+	<h1>Author: {{ author.get_full_name }}</h1>
+	<div style="margin-left:20px;margin-top:20px">
+		<h4>Songs</h4>
+		{% for song in author.get_songs_of_author %}
+			<p><strong><a href="{% url 'song-page' song.pk %}">{{ song.title }}</a> ({{ song.album }})</strong></p>
+			<p>{{ author.summary }}</p>
+		{% endfor %}
+	</div>
+
+{% endblock %}

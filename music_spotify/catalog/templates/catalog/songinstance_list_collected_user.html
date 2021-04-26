@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+	<h1>Collected songs</h1>
+
+	{% if songinstance_list %}
+	<ul>
+
+		{% for songinst in songinstance_list %}
+		<li>
+			<a href="{% url 'song-detail' songlist.song.pk %}">{{songinst.song.title}}</a> ({{ songinst.released }})
+		</li>
+		{% endfor %}
+	</ul>
+
+	{% else %}
+		<p>There are no songs collected.</p>
+	{% endif %}
+{% endblock %}
