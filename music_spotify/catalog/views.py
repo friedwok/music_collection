@@ -92,7 +92,7 @@ from .forms import AddSongInCollectionForm
 
 @permission_required('catalog.can_add_song#')
 def add_song(request, pk):
-	song_inst = get_object_or_404(Song, pk):
+	song_inst = get_object_or_404(Song, pk)
 
 	if request.method == 'POST':
 		form = AddSongInCollectionForm(request.POST)

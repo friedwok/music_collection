@@ -1,8 +1,8 @@
 from django import forms
-import models
+from . import models
 
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy_ as _
+from django.utils.translation import ugettext_lazy as _
 import datetime
 
 class AddSongInCollectionForm(forms.Form):
@@ -14,6 +14,6 @@ class AddSongInCollectionForm(forms.Form):
 
 		song_titles = [ song.name for song in models.Song.objects.all() ]
 		if song_name not in song_titles:
-			raise ValidationError(_('Song name is not valid')
+			raise ValidationError(_('Song name is not valid'))
 
 		return data
