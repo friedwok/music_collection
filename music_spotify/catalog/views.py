@@ -3,6 +3,7 @@ from .models import Song, SongInstance, Author, Genre, Album
 from django.views import generic
 from .additions import lyrics_html
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -73,11 +74,37 @@ class AlbumPageView(generic.DetailView):
 	template_name = 'catalog/album_detail.html'
 
 
-#class SongsCollectedByUserListView(LoginRequiredMixin, generic.ListView):
-	#model = SongInstance
-	#template_name = 'catalog/songinstance_list_collected_user.html'
-	#paginate_by = 10
+class SongsCollectedByUserListView(LoginRequiredMixin, generic.ListView):
+	model = SongInstance
+	template_name = 'catalog/songinstance_list_collected_user.html'
+	paginate_by = 10
 
-	#def get_queryset(self):
-	#	return SongInstance.objects.filter(collector=self.request.user).order_by('song')
+	def get_queryset(self):
+		return SongInstance.objects.filter(collector=self.request.user).order_by('song')
 
+
+from django.contrib.auth.decorators import permission_required
+
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .forms import AddSongInCollectionForm
+
+@permission_required('catalog.can_add_song#')
+def add_song(request, pk):
+	song_inst = get_object_or_404(Song, pk):
+
+	if request.method == 'POST':
+		form = AddSongInCollectionForm(request.POST)
+
+		# complete the ownership check later
+		if form.is_valid():
+			#
+			pass
+
+			return HttpResponseRedirect(reverse('my-collected'))
+	# for GET or any others methods (do later)
+	else:
+		default_song_name = 'Kanye West - Monster'
+		form = AddSongInCollectionForm(initial={'song_name': default_song_name,})
+	return render(request, 'catalog/add_song_collection.html', {'form': form, 'song_inst': song_inst})

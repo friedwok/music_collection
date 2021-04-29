@@ -39,6 +39,9 @@ class Song(models.Model):
 	def get_listening_count(self):
 		return SongInstance.objects.filter(song=self).count()
 
+	class Meta:
+		permissions = (("can_add_songs", "can_manage_collection"),)
+
 
 class SongInstance(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4,
@@ -48,6 +51,8 @@ class SongInstance(models.Model):
 	released = models.DateField(null=True, blank=True)
 	#ceollector is a owner of a colletion of musicial arts
 	collector = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+	#collected_by = models.BooleanField(null=True)
 
 	LOAN_STATUS = (
 		('s', 'Coming out soon'),
@@ -65,6 +70,7 @@ class SongInstance(models.Model):
 
 	class Meta:
 		ordering = ["-number_of_listens"]
+		#permissions = (("can_add_songs", "can_manage_collection"),)
 
 	def __str__(self):
 		authors = ', '.join([ author.alias for author in Author.objects.all() ])

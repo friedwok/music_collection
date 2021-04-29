@@ -23,12 +23,12 @@ class SongAdmin(admin.ModelAdmin):
 @admin.register(SongInstance)
 class SongInstanceAdmin(admin.ModelAdmin):
 	# add the collector later
-	list_display = ('song', 'status', 'number_of_listens', 'released')
+	list_display = ('song', 'status', 'collector', 'number_of_listens', 'released')
 	list_filter = ('number_of_listens', 'released')
 
 	fieldsets = (
 		(None, {
-			'fields': ('song', 'number_of_listens')
+			'fields': ('song', 'collector', 'number_of_listens')
 		}),
 		('Availability', {
 			'fields': ('status', 'released')

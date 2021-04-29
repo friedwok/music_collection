@@ -14,5 +14,9 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-	#path('mysongs/', views.SongsCollectedByUserListView.as_view(), name='my-collected'),
+	path('mysongs/', views.SongsCollectedByUserListView.as_view(), name='my-collected'),
+]
+
+urlpatterns += [
+	path('song/<int:pk>/add/', views.add_song, name='add-new-song'),
 ]
