@@ -3,7 +3,7 @@
 {% block content %}
 	<h1>Title: {{ song.title }}</h1>
 
-	<p><strong>Author:</strong> <a href="">{{ song.get_authors }}</a></p>
+	<p><strong>Author:</strong> <a href="{% url 'author-detail' song.author.pk %}">{{ song.get_authors }}</a></p>
 	<p><strong>Album:</strong> {{ song.album }}</p>
 	<p><strong>Genre:</strong> {{ song.genre }}</p>
 

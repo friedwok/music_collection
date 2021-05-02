@@ -20,3 +20,7 @@ urlpatterns += [
 urlpatterns += [
 	path('song/<int:pk>/add/', views.add_song, name='add-new-song'),
 ]
+
+urlpatterns += [
+	path('author/info/', views.AuthorProfileView.as_view(), name='my-profile'),
+]

@@ -3,7 +3,7 @@
 {% block content %}
 	<h1>Title: {{ song.title }}</h1>
 
-	<p><strong>Author:</strong> <a href="">{{ song.get_authors }}</a></p>
+	<p><strong>Author:</strong> <a href="{% url 'author-detail' song.author.pk %}">{{ song.get_authors }}</a></p>
 	<p><strong>Album:</strong> {{ song.album }}</p>
 	<p><strong>Genre:</strong> {{ song.genre }}</p>
 
@@ -11,22 +11,71 @@
 		<h4>Lyrics:</h4>
 
 		<hr>
-		<p>[Intro]​<br>
-		(2, 3, 4)<br>
+		<p>[Текст песни «ZEF»]<br>
 		<br>
-		[Chorus]<br>
-		Ahh! Ahh!<br>
-		We come from the land of the ice and snow<br>
-		From the midnight sun where the hot springs flow<br>
+		[Интро]<br>
+		Sayonara Boy!<br>
+		Sayonara<br>
+		Кто ты такой?<br>
 		<br>
-		[Verse 1]<br>
-		The hammer of the gods<br>
-		Will drive our ships to new lands<br>
-		To fight the horde, sing and cry<br>
-		Valhalla, I am coming<br>
+		[Предкуплет]<br>
+		Стены Babylon'a в свете неона (Ву-у, ву-у, ву-у)<br>
+		Броские соски на трёх полосках<br>
+		Старые кроссы, глаза-таблетосы (А-а-а)<br>
+		Хули нам? Я у мамы хулиган<br>
+		У меня есть травмат, я стреляю по ногам<br>
+		Если ты не делаешь dance — на районе тебе пиздец! (Ага)<br>
 		<br>
-		[Refrain]<br>
-		On we sweep with threshing oar<br>
-		Our only goal will be the western shore</p>
+		[Куплет 1]<br>
+		Со мной бедняки-полукровки<br>
+		Тусовки, наркотики, татуировки<br>
+		На подземной парковке мы делаем ZEF<br>
+		Нас уже много, и нам похуй на всех!<br>
+		<br>
+		[Припев]<br>
+		ZEF! ZEF! Мы делаем ZEF!<br>
+		ZEF! ZEF! И нам похуй на всех!<br>
+		ZEF! ZEF! Мы делаем ZEF!<br>
+		ZEF! ZEF! И нам похуй на всех!<br>
+		(ZEF!) Мы делаем ZEF!<br>
+		(ZEF!) И нам похуй на всех!<br>
+		(ZEF!) Мы делаем ZEF!<br>
+		(ZEF!) И нам похуй на всех!<br>
+		[Предкуплет]<br>
+		Стены Babylon'a в свете неона<br>
+		Броские соски на трёх полосках<br>
+		Старые кроссы, глаза-таблетосы (А-а-а)<br>
+		Хули нам? Я у мамы хулиган<br>
+		У меня есть травмат, я стреляю по ногам<br>
+		Если ты не делаешь dance — на районе тебе пиздец! (Ха)<br>
+		<br>
+		[Куплет 2]<br>
+		Jim Beam, Bombay, будто как ChocoPie<br>
+		Липнет, как клей<br>
+		Она знает, что у меня на уме<br>
+		Быть не в себе, а быть в ней<br>
+		Воняет травой, ты слышишь наш смех<br>
+		Футболки на тёлках взмывают вверх<br>
+		Мы ломимся в дом, сука открывает дверь<br>
+		Мы уже там, и мы делаем ZEF!<br>
+		<br>
+		[Припев]<br>
+		ZEF! ZEF! Мы делаем ZEF!<br>
+		ZEF! ZEF! И нам похуй на всех!<br>
+		ZEF! ZEF! Мы делаем ZEF!<br>
+		ZEF! ZEF! И нам похуй на всех!<br>
+		ZEF! ZEF! Мы делаем ZEF!<br>
+		ZEF! ZEF! И нам похуй на всех!<br>
+		ZEF! ZEF! Мы делаем ZEF!<br>
+		ZEF! ZEF! И нам похуй на всех!<br>
+		[Аутро]<br>
+		ZEF!<br>
+		ZEF!<br>
+		ZEF!<br>
+		ZEF!<br>
+		ZEF!<br>
+		ZEF!<br>
+		ZEF!<br>
+		ZEF!</p>
 	</div>
 {% endblock %}

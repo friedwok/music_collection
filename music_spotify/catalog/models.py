@@ -5,6 +5,7 @@ from .additions import lyrics_html
 from django.contrib.auth.models import User
 from datetime import date
 
+from django.utils import timezone
 # Create your models here.
 
 class Song(models.Model):
@@ -40,7 +41,8 @@ class Song(models.Model):
 		return SongInstance.objects.filter(song=self).count()
 
 	class Meta:
-		permissions = (("can_add_songs", "can_manage_collection"),)
+		ordering = ['author']
+		permissions = (("can_append_songs", "can_manage_collection"),)
 
 
 class SongInstance(models.Model):
@@ -48,7 +50,9 @@ class SongInstance(models.Model):
 				help_text="Unique ID for this composition of art.")
 	song = models.ForeignKey('Song', on_delete=models.CASCADE, null=True)
 	number_of_listens = models.IntegerField(default=0)
-	released = models.DateField(null=True, blank=True)
+	#released = models.DateField(null=True, blank=True)
+	#bought = models.DateField(default=date.today())
+	bought = models.DateField(default=timezone.now())
 	#ceollector is a owner of a colletion of musicial arts
 	collector = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -73,16 +77,22 @@ class SongInstance(models.Model):
 		#permissions = (("can_add_songs", "can_manage_collection"),)
 
 	def __str__(self):
-		authors = ', '.join([ author.alias for author in Author.objects.all() ])
-		return '%s - %s (%s)' % (authors, self.song, self.released)
-		#return '%s (%s) %s' % (self.song, self.released, self.number_of_listens)
-		#return '%s (%s)' % (self.id, self.song.title)
+		#authors = ', '.join([ author.alias for author in Author.objects.all() ])
+		#return '%s - %s (%s)' % (authors, self.song, self.released)
+		return '%s - %s, listens: %s, rel.: %s, collector: %s' % \
+			(self.song.author, self.song, self.number_of_listens, self.bought, self.collector)
 
 
 class Author(models.Model):
 	first_name = models.CharField(max_length=100)
 	last_name = models.CharField(max_length=100)
 	alias = models.CharField(max_length=100, blank=True)
+	info = models.TextField(max_length=10000,
+				null=True,
+				default='No info about this author.',
+				help_text='Enter some info about author')
+	#add later with pillow library
+	#photo = models.ImageField(upload_to='static/images/', default='default.jpg')
 
 	def get_absolute_url(self):
 		return reverse('author-detail', args=[str(self.id)])
@@ -96,6 +106,9 @@ class Author(models.Model):
 	def get_songs_of_author(self):
 		#return Song.objects.all()
 		return Song.objects.filter(author=self)
+
+	def get_albums(self):
+		return Album.objects.filter(author=self)
 
 	def get_full_name(self):
 		return self.first_name + ' \'' + self.alias + '\' ' + self.last_name
@@ -118,6 +131,7 @@ class Album(models.Model):
 
 	name = models.CharField(max_length=200, help_text="Name of album")
 	released = models.DateField(null=True, blank=True)
+	author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
 	def get_absolute_url(self):
 		return reverse('album-detail', args=[str(self.id)])

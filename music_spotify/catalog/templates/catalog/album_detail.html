@@ -6,7 +6,7 @@
 		<h4>Rel: {{ album.released }}</h4>
 		<hr>
 		{% for song in album.get_songs_from_album %}
-			<p><strong>{{ song.pk }}. <a href="{% url 'song-page' song.pk %}"> {{ song.title }}</a></strong></p>
+			<p><strong><a href="{% url 'song-page' song.pk %}"> {{ song.title }}</a></strong></p>
 		{% endfor %}
 	</div>
 

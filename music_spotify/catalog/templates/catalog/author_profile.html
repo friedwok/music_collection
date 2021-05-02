@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+	<h1>Personal data</h1>
+	<p><strong>Alias:</strong> {{ author.alias }}</p>
+	<p><strong>First name:</strong> {{ author.first_name }}</p>
+	<p><strong>Last name:</strong> {{ author.last_name }}</p>
+	<p><strong>About:</strong> {{ author.info }}</p>
+
+	<div style="margin-left:20px;margin-top:20px">
+		<h4>Albums</h4>
+		<hr>
+		{% for album in author.get_albums %}
+			<p><strong><a href="{% url 'my-profile' %}">{{ album.name }}</a> ({{ album.released }})</strong></p>
+		{% endfor %}
+	</div>
+
+{% endblock %}

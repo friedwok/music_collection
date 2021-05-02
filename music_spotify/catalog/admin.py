@@ -6,11 +6,11 @@ from .models import Song, SongInstance, Author, Genre, Album
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
 	list_display = ('alias', 'first_name', 'last_name')
-	fields = ['first_name', 'last_name', 'alias']
+	fields = ['first_name', 'last_name', 'alias', 'info']
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-	list_display = ('name', 'released')
+	list_display = ('name', 'released', 'author')
 
 class SongInstanceInline(admin.TabularInline):
 	model = SongInstance
@@ -23,15 +23,15 @@ class SongAdmin(admin.ModelAdmin):
 @admin.register(SongInstance)
 class SongInstanceAdmin(admin.ModelAdmin):
 	# add the collector later
-	list_display = ('song', 'status', 'collector', 'number_of_listens', 'released')
-	list_filter = ('number_of_listens', 'released')
+	list_display = ('song', 'status', 'collector', 'number_of_listens', 'bought')
+	list_filter = ('number_of_listens', 'bought')
 
 	fieldsets = (
 		(None, {
 			'fields': ('song', 'collector', 'number_of_listens')
 		}),
 		('Availability', {
-			'fields': ('status', 'released')
+			'fields': ('status', 'bought')
 		}),
 	)
 

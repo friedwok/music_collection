@@ -8,7 +8,7 @@
 
 		{% for songinst in songinstance_list %}
 		<li>
-			<a href="{% url 'song-page' songinst.song.pk %}">{{songinst.song.title}}</a> ({{ songinst.released }})
+			<a href="{% url 'song-page' songinst.song.pk %}">{{songinst.song.title}}</a> ({{ songinst.bought }})
 		</li>
 		{% endfor %}
 	</ul>

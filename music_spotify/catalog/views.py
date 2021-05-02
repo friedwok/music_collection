@@ -74,13 +74,20 @@ class AlbumPageView(generic.DetailView):
 	template_name = 'catalog/album_detail.html'
 
 
-class SongsCollectedByUserListView(LoginRequiredMixin, generic.ListView):
+class SongsCollectedByUserListView(generic.ListView):
 	model = SongInstance
 	template_name = 'catalog/songinstance_list_collected_user.html'
 	paginate_by = 10
 
+	permission_required = 'catalog.can_append_songs'
+
 	def get_queryset(self):
 		return SongInstance.objects.filter(collector=self.request.user).order_by('song')
+
+
+class AuthorProfileView(generic.DetailView):
+	model = Author
+	template_name = 'catalog/author_profile.html'
 
 
 from django.contrib.auth.decorators import permission_required
@@ -89,22 +96,30 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import AddSongInCollectionForm
+import datetime
 
-@permission_required('catalog.can_add_song#')
+@permission_required('catalog.can_append_songs')
 def add_song(request, pk):
-	song_inst = get_object_or_404(Song, pk)
+	song_object = get_object_or_404(Song, pk=pk)
 
 	if request.method == 'POST':
 		form = AddSongInCollectionForm(request.POST)
-
+		print(form)
 		# complete the ownership check later
 		if form.is_valid():
-			#
-			pass
+			#s = SongInstance(song=models.Song.objects.all()[0],
+			#		bought=datetime.date.today(),
+			#		collector=models.User.objects.all()[1])
+			s = SongInstance(song=song_object,
+					bought=datetime.date.today(),
+					collector=request.user)
+			s.save()
 
 			return HttpResponseRedirect(reverse('my-collected'))
 	# for GET or any others methods (do later)
 	else:
-		default_song_name = 'Kanye West - Monster'
-		form = AddSongInCollectionForm(initial={'song_name': default_song_name,})
-	return render(request, 'catalog/add_song_collection.html', {'form': form, 'song_inst': song_inst})
+		#default_song_name = 'Kanye West - Monster'
+		#song_name = song_inst.title
+		#form = AddSongInCollectionForm(initial={'song_name': default_song_name,})
+		form = AddSongInCollectionForm(initial={'song': song_object,})
+	return render(request, 'catalog/add_song_collection.html', {'form': form, 'song': song_object})
