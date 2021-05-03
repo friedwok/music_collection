@@ -6,7 +6,7 @@ from .models import Song, SongInstance, Author, Genre, Album
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
 	list_display = ('alias', 'first_name', 'last_name')
-	fields = ['first_name', 'last_name', 'alias', 'info']
+	fields = ['first_name', 'last_name', 'alias', 'user', 'info']
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):

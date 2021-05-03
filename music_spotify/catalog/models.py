@@ -42,7 +42,7 @@ class Song(models.Model):
 
 	class Meta:
 		ordering = ['author']
-		permissions = (("can_append_songs", "can_manage_collection"),)
+		permissions = (("can_append_songs", "Can_manage_collection"),)
 
 
 class SongInstance(models.Model):
@@ -84,6 +84,7 @@ class SongInstance(models.Model):
 
 
 class Author(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 	first_name = models.CharField(max_length=100)
 	last_name = models.CharField(max_length=100)
 	alias = models.CharField(max_length=100, blank=True)
@@ -113,6 +114,9 @@ class Author(models.Model):
 	def get_full_name(self):
 		return self.first_name + ' \'' + self.alias + '\' ' + self.last_name
 
+	class Meta:
+		permissions = [("can_view_profile", "May have a profile")]
+
 
 class Genre(models.Model):
 
@@ -131,7 +135,7 @@ class Album(models.Model):
 
 	name = models.CharField(max_length=200, help_text="Name of album")
 	released = models.DateField(null=True, blank=True)
-	author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+	author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
 
 	def get_absolute_url(self):
 		return reverse('album-detail', args=[str(self.id)])

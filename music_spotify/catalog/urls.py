@@ -22,5 +22,5 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-	path('author/info/', views.AuthorProfileView.as_view(), name='my-profile'),
+	path('author/info/<int:pk>/', views.AuthorProfileView.as_view(), name='my-profile'),
 ]
