@@ -123,3 +123,17 @@ def add_song(request, pk):
 		#form = AddSongInCollectionForm(initial={'song_name': default_song_name,})
 		form = AddSongInCollectionForm(initial={'song': song_object,})
 	return render(request, 'catalog/add_song_collection.html', {'form': form, 'song': song_object})
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+#from rest_framework.generics import get_object_or_404
+from .serializers import GenreSerializer
+
+class GenreView(APIView):
+	def get(self, request):
+		genres = Genre.objects.all()
+		serializer = GenreSerializer(genres, many=True)
+		return Response({"genres": serializer.data})
+
+	#def post(self, request):
+		#genre = request.data.get('genre')

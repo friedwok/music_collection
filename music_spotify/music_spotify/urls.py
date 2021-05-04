@@ -42,3 +42,9 @@ urlpatterns += [
 	path('accounts/', include('django.contrib.auth.urls')),
 ]
 
+#REST API
+from catalog.views import GenreView
+urlpatterns += [
+	path('api/genres/', GenreView.as_view()),
+]
+

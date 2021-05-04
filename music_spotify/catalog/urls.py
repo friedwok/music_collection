@@ -24,3 +24,8 @@ urlpatterns += [
 urlpatterns += [
 	path('author/info/<int:pk>/', views.AuthorProfileView.as_view(), name='my-profile'),
 ]
+
+# REST API
+#urlpatterns += [
+#	path('genres/', GenreView.as_view()),
+#]
